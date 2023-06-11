@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<VideoModel> lstVideo =  ViewBag.listSong;
+    ViewData["keylang"] = ViewBag.Languages ;
+    LanguageModel lang = ViewBag.Languages;
+    VideoModel v = lstVideo[0];
+}
+<div class="content_lstSong_searchPage">
+    @{
+        foreach (VideoModel item in lstVideo)
+        {
+            <div class="block_card">
+                <div class="card_searchPage">
+                    <div class="card_img">
+                        <a href="@Url.Action("Watch","Home",new{id=item.id.videoID})">
+                            <img src="@item.snippet.thumbnails.medium.url" />
+                            <span class="card_img--duration">3:33</span>
+                        </a>
+                    </div>
+                    <div class="card_rigt">
+                        <div class="card_title">
+                            <a class="card_title-link" href="@Url.Action("Watch","Home",new{id=item.id.videoID})">
+                                <h2 class="card-title-text card-title-text-searchPage">
+                                   @item.snippet.title
+                                </h2>
+                            </a>
+                        </div>
+                        <div class="card_info_searchPage">
+                            <p>@Helper.ViewCount(1)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+

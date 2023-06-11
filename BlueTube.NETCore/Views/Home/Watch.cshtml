@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Watch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    VideoModel.detailVideoModel detailVideo = ViewBag.detailVideo;
+    LanguageModel langModel = ViewBag.Languages;
+    List<VideoModel> lstVideo = ViewBag.lstVideo;
+    ViewData["keylang"] = ViewBag.Languages;
+    string link = "https://www.youtube.com/embed/"+detailVideo.id+"";
+}
+<div class="row">
+    <div class="col-lg-8 col-md-7 col-sm-12 showvideo_pageDetail">
+        <iframe class="showvideo" src="@link" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="comment_pageDetail">
+            <div class="pageDetail_watch"><h3 class="pageDetail_watch--title">@detailVideo.snippet.title</h3></div>
+            <div class="pageDetail_watch"><p class="pageDetail_watch--channelTitle">@detailVideo.channelTitle</p></div>
+            <div class="pageDetail_watch"><p class="pageDetail_watch--ViewCount">@Helper.ViewCount(1) Lượt xem</p></div>
+            <div class="pageDetail_watch"><p class="pageDetail_watch--UploadDate">1-1</p></div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-5 col-sm-12">
+        <div class="content_lstSong_pageDetail">
+            @{
+                foreach (VideoModel item in lstVideo)
+                {
+                    <div class="block_card_pageDetail">
+                        <div class="card_pageDetail">
+                            <div class="card_img_pageDetail">
+                                <a href="@Url.Action("Watch","Home",new{id=item.id.videoID})">
+                                    <img src="@item.snippet.thumbnails.medium.url" />
+                                    <span class="card_img--duration_pageDetail">3:33</span>
+                                </a>
+                            </div>
+                            <div class="card_rigt_pageDetail">
+                                <div class="card_title_pageDetail">
+                                    <a class="card_title-link_pageDetail" href="@Url.Action("Watch","Home",new{id=item.id.videoID})">
+                                        <h2 class="card-title-text-pageDetail"> 
+                                           @item.snippet.title
+                                        </h2>
+                                    </a>
+                                </div>
+                                <div class="card_info_pageDetail">
+                                    <p>@Helper.ViewCount(1) Lượt xem</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+

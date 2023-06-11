@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Index";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    LanguageModel langModel = ViewBag.Languages;
+    ViewData["keylang"] = ViewBag.Languages;
+    List<VideoModel> lstVideoModel = ViewBag.listSong;
+}
+<div class="content_lstSong">
+    <div class="row">
+        @{
+            foreach (VideoModel item in lstVideoModel)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-6 block_card">
+                    <div class="_card">
+                        <div class="card_img">
+                            <a href="@Url.Action("Watch","Home",new{id=item.id.videoID})">
+                                <img src=@item.snippet.thumbnails.medium.url alt="Hình ảnh của tôi">
+                                <span class="card_img--duration">3:30</span>
+                            </a>
+                        </div>
+                        <div class="card_title">
+                            <a class="card_title-link" href="@Url.Action("Watch","Home",new{id=item.id.videoID})">
+                                <h2 class="card-title-text">
+                                    @item.snippet.title
+                                </h2>
+                            </a>
+                        </div>
+                        <div class="card_info">
+                            <p>@Helper.ViewCount(1)Lượt xem</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }      
+    </div>
+</div>
+
